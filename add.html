@@ -19,8 +19,31 @@
     <main>
       <h2>Tidigare arbetslivserfarenheter</h2>
       <p>Lägg till ny erfarenhet</p>
+      <div id="input-div">
+        <form method="post" id="add-form">
+          <label for="companyname">Företagsnamn: </label>
+          <input type="text" name="companyname" id="companyname" placeholder="Företagsnamn">
+          <br>
+          <label for="jobtitle">Arbetstitel: </label>
+          <input type="text" name="jobtitle" id="jobtitle" placeholder="Arbetstitel">
+          <br>
+          <label for="location">Arbetets plats: </label>
+          <input type="text" name="location" id="location" placeholder="Arbetets plats">
+          <br>
+          <label for="startdate">Startdatum: </label>
+          <input type="text" name="startdate" id="startdate" placeholder="Startdatum">
+          <br>
+          <label for="enddate">Slutdatum: </label>
+          <input type="text" name="enddate" id="enddate" placeholder="Slutdatum">
+          <br>
+          <label for="description">Beskrivning: </label>
+          <textarea id="description" name="description" placeholder="Beskrivning:" rows="4" cols="50"></textarea>
+          <br>
+          <input type="submit" id="addButton" value="Lägg till">
+        </form>
+      </div>
     </main>
     <footer></footer>
-    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="./src/main.js"></script>
   </body>
 </html>
