@@ -8,19 +8,50 @@ document.addEventListener("DOMContentLoaded", () => {
 
     form.addEventListener("submit", (event) => {
         event.preventDefault();
-        addWork();
 
+        if (!createErrorMessage())  //Om errors[] != 0 körs inte addWork
+            return;
+
+        addWork();  //Request körs endast om alla input är ifyllda
     })
 })
 
-async function addWork() {
 
-    const companyName = document.getElementById("companyname");
-    const jobTitle = document.getElementById("jobtitle");
-    const location = document.getElementById("location");
-    const startDate = document.getElementById("startdate");
-    const endDate = document.getElementById("enddate");
-    const description = document.getElementById("description");
+const companyName = document.getElementById("companyname");
+const jobTitle = document.getElementById("jobtitle");
+const location = document.getElementById("location");
+const startDate = document.getElementById("startdate");
+const endDate = document.getElementById("enddate");
+const description = document.getElementById("description");
+
+
+//Kolla att alla input-fält är ifyllda
+
+function createErrorMessage() {
+    const errors = [];
+    const errorList = document.getElementById("errorList");
+    errorList.innerHTML = "";
+
+    if (companyName.value === "") errors.push("Ange företagsnamn");
+    if (jobTitle.value === "") errors.push("Ange arbetstitel");
+    if (location.value === "") errors.push("Ange arbetets plats");
+    if (startDate.value === "") errors.push("Ange startdatum");
+    if (endDate.value === "") errors.push("Ange slutdatum");
+    if (description.value === "") errors.push("Ange beskrivning");
+
+    console.log(errors);
+    errors.forEach(error => {
+        const li = document.createElement("li");
+        li.textContent = `${error}`;
+        errorList.appendChild(li);
+    })
+
+    return errors.length === 0;
+}
+
+
+
+async function addWork() {
 
     let work = {
         companyname: companyName.value,
@@ -42,12 +73,19 @@ async function addWork() {
     let data = await response.json();
     console.log(data);
 
-    companyName.value = "";
-    jobTitle.value = "";
-    location.value = "";
-    startDate.value = "";
-    endDate.value = "";
-    description.value = "";
+    //För säkerhet, ytterligare felmeddelande om request skulle köras
+
+    if (data.Message) {
+        const errorSpot = document.getElementById("errorMessage");  
+        errorSpot.textContent = data.Message;
+    } else {
+        companyName.value = "";
+        jobTitle.value = "";
+        location.value = "";
+        startDate.value = "";
+        endDate.value = "";
+        description.value = "";
+    }
 }
 
 
@@ -68,11 +106,14 @@ async function fetchWork() {
     }
 }
 
+
+
 function renderWork(jsonData) {
 
-    console.log(jsonData);
-
     const listDiv = document.getElementById("list-div");
+
+    if (!listDiv) return;
+
     listDiv.innerHTML = "";
 
     jsonData.forEach(element => {
@@ -119,6 +160,10 @@ function renderWork(jsonData) {
     });
 }
 
+
+
+
+
 function deleteList(id) {
 
     const list = document.getElementById(`ul-${id}`);
@@ -130,6 +175,8 @@ function deleteList(id) {
         deleteWork(id);
     })
 }
+
+
 
 
 async function deleteWork(id) {

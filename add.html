@@ -18,6 +18,8 @@
     </header>
     <main>
       <h2>Lägg till ny erfarenhet</h2>
+      <p id="errorMessage"></p>
+      <ul id="errorList"></ul>
       <div id="input-div">
         <form method="post" id="add-form">
           <label for="companyname">Företagsnamn: </label>
@@ -30,10 +32,10 @@
           <input type="text" name="location" id="location" placeholder="Arbetets plats">
           <br>
           <label for="startdate">Startdatum: </label>
-          <input type="text" name="startdate" id="startdate" placeholder="Startdatum">
+          <input type="text" name="startdate" id="startdate" placeholder="åååå-mm-dd">
           <br>
           <label for="enddate">Slutdatum: </label>
-          <input type="text" name="enddate" id="enddate" placeholder="Slutdatum">
+          <input type="text" name="enddate" id="enddate" placeholder="åååå-mm-dd">
           <br>
           <label for="description">Beskrivning: </label>
           <textarea id="description" name="description" placeholder="Beskrivning:" rows="4" cols="50"></textarea>
