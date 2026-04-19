@@ -26,10 +26,10 @@ const description = document.getElementById("description");
 
 
 //Kolla att alla input-fält är ifyllda
-
 function createErrorMessage() {
     const errors = [];
-    const errorList = document.getElementById("errorList");
+    const errorList = document.getElementById("frontend-error");
+
     errorList.innerHTML = "";
 
     if (companyName.value === "") errors.push("Ange företagsnamn");
@@ -38,8 +38,7 @@ function createErrorMessage() {
     if (startDate.value === "") errors.push("Ange startdatum");
     if (endDate.value === "") errors.push("Ange slutdatum");
     if (description.value === "") errors.push("Ange beskrivning");
-
-    console.log(errors);
+    
     errors.forEach(error => {
         const li = document.createElement("li");
         li.textContent = `${error}`;
@@ -73,11 +72,21 @@ async function addWork() {
     let data = await response.json();
     console.log(data);
 
-    //För säkerhet, ytterligare felmeddelande om request skulle köras
+    /**
+     * För säkerhet, ytterligare felmeddelanden 
+     * om request skulle köras trots frontend-check
+     */
 
     if (data.Message) {
-        const errorSpot = document.getElementById("errorMessage");  
-        errorSpot.textContent = data.Message;
+        const errorlist = document.getElementById("backend-error");
+        errorlist.innerHTML = "";
+        const Message = data.Message;
+
+        Message.forEach(message => {
+            const li = document.createElement("li");
+            li.textContent = message;
+            errorlist.appendChild(li);
+        })
     } else {
         companyName.value = "";
         jobTitle.value = "";
