@@ -64,7 +64,7 @@ async function addWork() {
         description: description.value
     }
 
-    let response = await fetch('http://localhost:5000/works', {
+    let response = await fetch('https://dt207g-lab2-webbtj.onrender.com/works', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
