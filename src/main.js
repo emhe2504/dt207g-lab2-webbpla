@@ -32,13 +32,13 @@ function createErrorMessage() {
 
     errorList.innerHTML = "";
 
-    if (companyName.value === "") errors.push("Ange företagsnamn");
-    if (jobTitle.value === "") errors.push("Ange arbetstitel");
-    if (location.value === "") errors.push("Ange arbetets plats");
-    if (startDate.value === "") errors.push("Ange startdatum");
-    if (endDate.value === "") errors.push("Ange slutdatum");
-    if (description.value === "") errors.push("Ange beskrivning");
-    
+    if (companyName.value.trim() === "") errors.push("Ange företagsnamn");
+    if (jobTitle.value.trim() === "") errors.push("Ange arbetstitel");
+    if (location.value.trim() === "") errors.push("Ange arbetets plats");
+    if (startDate.value.trim() === "") errors.push("Ange startdatum");
+    if (endDate.value.trim() === "") errors.push("Ange slutdatum");
+    if (description.value.trim() === "") errors.push("Ange beskrivning");
+
     errors.forEach(error => {
         const li = document.createElement("li");
         li.textContent = `${error}`;
