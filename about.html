@@ -1,26 +1,51 @@
 <!doctype html>
 <html lang="sv">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webbplats labb2</title>
-  </head>
-  <body>
-    <header>
-      <h1>Arbetsloggen</h1>
-      <nav>
-        <ul>
-          <li><a href="/index.html">Startsida</a></li>
-          <li><a href="/add.html">Lägga till</a></li>
-          <li><a href="/about.html">Om</a></li>
-        </ul>
-      </nav>
-    </header>
-    <main>
-      <h2>Tidigare arbetslivserfarenheter</h2>
-      <p>Om..</p>
-    </main>
-    <footer></footer>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Webbplats labb2</title>
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+
+<body>
+  <header>
+    <h1>Arbetsloggen</h1>
+    <nav>
+      <ul>
+        <li><a href="/index.html">Registrerade erfarenheter</a></li>
+        <li><a href="/add.html">Lägga till</a></li>
+        <li><a href="/about.html">Om</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <h2>Om</h2>
+    <div id="about-div">
+      <article>
+        <p>Arbetsloggen är en webbplats vars syfte är att lagra tidigare arbetslivserfarenheter, nästan som ett CV.
+          Användaren kan registrera sina erfarenheter via ett formulär under fliken "Lägga till". I listan där alla
+          tidigare erfarenheter lagras, under fliken "Registrerade erfarenheter", går det även att radera ett tidigare
+          arbete om så önskas.</p>
+        <p>För denna uppgift har jag valt att testa en ny relationsdatabas, SQLite. Denna databas använder sig inte av
+          en databas-server likt andra relationsdatabaser, utan är en databasmotor som är filbaserad (till skillnad från
+          PostgreSQL som jag använde i tidigare uppgift).</p>
+        <p>Mina slutsatser av uppgiften är att SQLite känns lättare att arbeta med än vad jag upplevde Postgre, dock kan
+          det också påverkas lite av att detta är uppgift nummer två. Arbetet med backend-baserad utveckling känns
+          fortfarande klurigt och svårare än tidigare kurser. Mer övning krävs fortfarande för att utveckla kunskaperna.
+          Utöver detta så är webbtjänster en finurlig uppfinning och att skapa sina egna API:er är ändå enklare är man
+          kan tro. Dock, likt allt inom denna kurs, så kommer det krävas mer övning för att det ska fungera flytande och
+          för att man ska känna att kunskaperna sitter fullt ut. Det känns dock smart att testa olika relationsdatabaser
+          för att lära sig hur de olika databaserna fungerar. Överlag är det väldigt praktiskt att arbeta på detta sätt
+          mellan frontend och backend.</p>
+      </article>
+    </div>
+  </main>
+  <footer>
+    <h3>Arbetsloggen 2026</h3>
+    <p>Av: Emma Heikkinen, emhe2504@student.miun.se</p>
+  </footer>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
 </html>

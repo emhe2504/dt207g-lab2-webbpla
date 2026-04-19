@@ -1,0 +1,259 @@
+body {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+header {
+    display: grid;
+}
+
+h1 {
+    display: grid;
+    text-align: left;
+    margin: 0;
+    padding: 1%;
+    padding-left: 3%;
+    color: #F564A9;
+}
+
+nav ul {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-self: center;
+    list-style: none;
+    text-align: center;
+    padding-left: 0;
+    margin: 0;
+    background-color: #F891BB;
+}
+
+nav ul li {
+    display: grid;
+    width: 100%;
+    padding-top: 2.5%;
+    padding-bottom: 2.5%;
+}
+
+nav ul li a {
+    display: grid;
+    width: 100%;
+    justify-self: center;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+nav ul li:hover {
+    background-color: #F564A9;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+main {
+    display: grid;
+    width: 100%;
+}
+
+h2 {
+    display: grid;
+    text-align: center;
+    margin: 0;
+    padding-top: 4%;
+    padding-bottom: 4%;
+    background-color: #fffcbe;
+    color: #F564A9;
+    font-size: 26px;
+}
+
+#list-div,
+#input-div,
+#about-div {
+    display: grid;
+    justify-self: center;
+    width: 60%;
+    border: 2px solid #F564A9;
+    margin-top: 3%;
+}
+
+#list-div ul {
+    display: grid;
+    list-style: none;
+    line-height: 1.5em;
+    padding-left: 4%;
+    padding-top: 2%;
+    margin-bottom: 3%;
+}
+
+ul li:nth-child(7) {
+    list-style: none;
+}
+
+#list-div ul button {
+    border: none;
+    background-color: white;
+    font-size: 16px;
+    padding: 0;
+    margin-top: 0.5%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-decoration: underline;
+    cursor: pointer;
+    color: rgb(92, 90, 90);
+}
+
+#list-div ul button:hover {
+    color: black;
+}
+
+#add-form {
+    display: grid;
+    width: 70%;
+    padding: 1.5%;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 1%;
+}
+
+input[type="text"] {
+    padding: 3px;
+}
+
+input[type="submit"] {
+    display: grid;
+    width: 30%;
+    border: 1px solid black;
+    background-color: white;
+    padding: 3px;
+}
+
+#about-div p {
+    padding: 2%;
+    padding-bottom: 1%;
+}
+
+#backend-error,
+#frontend-error {
+    margin-left: 1%;
+    margin-top: 2%;
+    color: red;
+}
+
+footer {
+    display: grid;
+    width: 100%;
+    text-align: center;
+    margin-top: 4%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    color: #F564A9;
+    background-color: #fffcbe;
+}
+
+footer p {
+    font-weight: bold;
+}
+
+@media screen and (max-width: 900px) {
+
+    h1 {
+        font-size: 30px;
+    }
+
+    nav ul li a {
+        font-size: 15px;
+    }
+
+    #list-div,
+    #input-div,
+    #about-div {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+
+    nav ul {
+        grid-template-columns: none;
+    }
+
+    nav ul li:nth-child(1) {
+        border-bottom: 1px solid #F564A9;
+    }
+
+    nav ul li:nth-child(2) {
+        border-bottom: 1px solid #F564A9;
+    }
+
+    h2 {
+        padding-top: 6%;
+        padding-bottom: 6%;
+    }
+
+    #backend-error,
+    #frontend-error {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+
+    h1 {
+        font-size: 26px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    h3 {
+        font-size: 18px;
+    }
+
+    nav ul li a {
+        font-size: 12px;
+    }
+
+    #list-div ul li {
+
+        font-size: 12px;
+    }
+
+    #list-div ul button {
+        font-size: 12px;
+    }
+
+    p {
+        font-size: 12px;
+    }
+
+    #add-form {
+        width: 85%;
+    }
+
+    label {
+        font-size: 12px;
+    }
+
+    input[type="text"] {
+        font-size: 12px;
+    }
+
+    input[type="submit"] {
+        margin-left: 1%;
+        font-size: 12px;
+    }
+
+    #backend-error,
+    #frontend-error {
+        font-size: 12px;
+    }
+}

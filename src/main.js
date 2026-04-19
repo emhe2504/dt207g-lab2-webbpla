@@ -1,0 +1,207 @@
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    fetchWork()
+
+    const form = document.getElementById("add-form");
+    if (!form) return;
+
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        if (!createErrorMessage())  //Om det finns fel körs inte addWork
+            return;
+
+        addWork();  //Request körs endast om alla input är ifyllda
+    })
+})
+
+
+const companyName = document.getElementById("companyname");
+const jobTitle = document.getElementById("jobtitle");
+const location = document.getElementById("location");
+const startDate = document.getElementById("startdate");
+const endDate = document.getElementById("enddate");
+const description = document.getElementById("description");
+
+
+/**
+ * Kolla att alla input-fält är ifyllda.
+ * Trim så inte endast mellanslag kan anges.
+ */
+function createErrorMessage() {
+    const errors = [];
+    const errorList = document.getElementById("frontend-error");
+
+    errorList.innerHTML = "";
+
+    if (companyName.value.trim() === "") errors.push("Ange företagsnamn");
+    if (jobTitle.value.trim() === "") errors.push("Ange arbetstitel");
+    if (location.value.trim() === "") errors.push("Ange arbetets plats");
+    if (startDate.value.trim() === "") errors.push("Ange startdatum");
+    if (endDate.value.trim() === "") errors.push("Ange slutdatum");
+    if (description.value.trim() === "") errors.push("Ange beskrivning");
+
+    errors.forEach(error => {
+        const li = document.createElement("li"); //li för varje error
+        li.textContent = `${error}`;
+        errorList.appendChild(li);
+    })
+
+    return errors.length === 0;
+}
+
+
+// Lägga till work i API
+async function addWork() {
+
+    let work = {
+        companyname: companyName.value,
+        jobtitle: jobTitle.value,
+        location: location.value,
+        startdate: startDate.value,
+        enddate: endDate.value,
+        description: description.value
+    }
+
+    let response = await fetch('http://localhost:5000/works', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(work)
+    });
+
+    let data = await response.json();
+    console.log(data);
+
+    /**
+     * Ytterligare felmeddelanden 
+     * om request skulle köras trots frontend-check
+     */
+
+    if (data.Message) {
+        const errorlist = document.getElementById("backend-error");
+        errorlist.innerHTML = "";
+        const Message = data.Message;
+
+        Message.forEach(message => {
+            const li = document.createElement("li");
+            li.textContent = message;
+            errorlist.appendChild(li);
+        })
+    } else {
+        companyName.value = "";
+        jobTitle.value = "";
+        location.value = "";
+        startDate.value = "";
+        endDate.value = "";
+        description.value = "";
+    }
+}
+
+
+
+//Hämta alla work i API
+async function fetchWork() {
+
+    const link = "https://dt207g-lab2-webbtj.onrender.com/works";
+
+    try {
+
+        const data = await fetch(link);
+        const jsonData = await data.json();
+
+        renderWork(jsonData);
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+
+//Skriva ut alla work från API i listor på frontend-webbsida
+function renderWork(jsonData) {
+
+    const listDiv = document.getElementById("list-div");
+
+    if (!listDiv) return;
+
+    listDiv.innerHTML = "";
+
+    jsonData.forEach(element => {
+
+        const id = element.id;
+        const companyname = element.companyname;
+        const jobtitle = element.jobtitle;
+        const location = element.location;
+        const startdate = element.startdate;
+        const enddate = element.enddate;
+        const description = element.description;
+
+        const ulList = document.createElement("ul");
+        ulList.id = `ul-${id}`;
+
+        const compLi = document.createElement("li");
+        compLi.textContent = companyname;
+
+        const jobtLi = document.createElement("li");
+        jobtLi.textContent = jobtitle;
+
+        const locLi = document.createElement("li");
+        locLi.textContent = location;
+
+        const startLi = document.createElement("li");
+        startLi.textContent = startdate;
+
+        const endLi = document.createElement("li");
+        endLi.textContent = enddate;
+
+        const descLi = document.createElement("li");
+        descLi.textContent = description;
+
+        const deleteLi = document.createElement("li");
+        const deleteButton = document.createElement("button");
+        deleteButton.id = `button-${id}`;
+        deleteButton.textContent = "Radera";
+        deleteLi.appendChild(deleteButton);
+
+        ulList.append(compLi, jobtLi, locLi, startLi, endLi, descLi, deleteLi);
+        listDiv.appendChild(ulList);
+
+        deleteList(id);
+    });
+}
+
+
+
+
+//Ta bort lista på webbsida
+function deleteList(id) {
+
+    const list = document.getElementById(`ul-${id}`);
+    const deleteButton = document.getElementById(`button-${id}`);
+
+    deleteButton.addEventListener("click", () => {
+
+        list.remove();
+        deleteWork(id);
+    })
+}
+
+
+
+//Ta bort work från API, med id
+async function deleteWork(id) {
+
+    let response = await fetch(`https://dt207g-lab2-webbtj.onrender.com/works${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+    let data = await response.json();
+    console.log(data);
+}
