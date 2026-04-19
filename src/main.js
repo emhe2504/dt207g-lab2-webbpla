@@ -195,7 +195,7 @@ function deleteList(id) {
 //Ta bort work från API, med id
 async function deleteWork(id) {
 
-    let response = await fetch(`https://dt207g-lab2-webbtj.onrender.com/works${id}`, {
+    let response = await fetch(`https://dt207g-lab2-webbtj.onrender.com/works/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
