@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", (event) => {
         event.preventDefault();
 
-        if (!createErrorMessage())  //Om errors[] != 0 körs inte addWork
+        if (!createErrorMessage())  //Om det finns fel körs inte addWork
             return;
 
         addWork();  //Request körs endast om alla input är ifyllda
@@ -25,7 +25,10 @@ const endDate = document.getElementById("enddate");
 const description = document.getElementById("description");
 
 
-//Kolla att alla input-fält är ifyllda
+/**
+ * Kolla att alla input-fält är ifyllda.
+ * Trim så inte endast mellanslag kan anges.
+ */
 function createErrorMessage() {
     const errors = [];
     const errorList = document.getElementById("frontend-error");
@@ -40,7 +43,7 @@ function createErrorMessage() {
     if (description.value.trim() === "") errors.push("Ange beskrivning");
 
     errors.forEach(error => {
-        const li = document.createElement("li");
+        const li = document.createElement("li"); //li för varje error
         li.textContent = `${error}`;
         errorList.appendChild(li);
     })
@@ -49,7 +52,7 @@ function createErrorMessage() {
 }
 
 
-
+// Lägga till work i API
 async function addWork() {
 
     let work = {
@@ -73,7 +76,7 @@ async function addWork() {
     console.log(data);
 
     /**
-     * För säkerhet, ytterligare felmeddelanden 
+     * Ytterligare felmeddelanden 
      * om request skulle köras trots frontend-check
      */
 
@@ -99,6 +102,7 @@ async function addWork() {
 
 
 
+//Hämta alla work i API
 async function fetchWork() {
 
     const link = "http://localhost:5000/works";
@@ -117,6 +121,7 @@ async function fetchWork() {
 
 
 
+//Skriva ut alla work från API i listor på frontend-webbsida
 function renderWork(jsonData) {
 
     const listDiv = document.getElementById("list-div");
@@ -172,7 +177,7 @@ function renderWork(jsonData) {
 
 
 
-
+//Ta bort lista på webbsida
 function deleteList(id) {
 
     const list = document.getElementById(`ul-${id}`);
@@ -187,7 +192,7 @@ function deleteList(id) {
 
 
 
-
+//Ta bort work från API, med id
 async function deleteWork(id) {
 
     let response = await fetch(`http://localhost:5000/works/${id}`, {
