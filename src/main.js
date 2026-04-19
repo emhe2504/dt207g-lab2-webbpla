@@ -105,7 +105,7 @@ async function addWork() {
 //Hämta alla work i API
 async function fetchWork() {
 
-    const link = "http://localhost:5000/works";
+    const link = "https://dt207g-lab2-webbtj.onrender.com/works";
 
     try {
 
@@ -195,7 +195,7 @@ function deleteList(id) {
 //Ta bort work från API, med id
 async function deleteWork(id) {
 
-    let response = await fetch(`http://localhost:5000/works/${id}`, {
+    let response = await fetch(`https://dt207g-lab2-webbtj.onrender.com/works${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
